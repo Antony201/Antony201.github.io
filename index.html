@@ -1,626 +1,109 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Запрошення на весілля | Антон & Марія</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #fff9f5 0%, #fff0e6 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Декоративный фоновый узор */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.12"><path fill="none" stroke="%23b34e4e" stroke-width="0.6" d="M40 80 Q55 65 70 80 Q85 95 100 80 Q115 65 130 80 Q145 95 160 80 M20 120 Q35 105 50 120 Q65 135 80 120 Q95 105 110 120 Q125 135 140 120 Q155 105 170 120 M90 30 Q100 15 110 30 Q120 45 130 30 M70 150 Q80 135 90 150 Q100 165 110 150" /><circle cx="100" cy="50" r="3" fill="%23b34e4e" opacity="0.3"/><circle cx="40" cy="130" r="2.5" fill="%23b34e4e" opacity="0.3"/><circle cx="150" cy="100" r="2" fill="%23b34e4e" opacity="0.3"/></svg>');
-            background-repeat: repeat;
-            background-size: 80px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .main-container {
-            width: 100%;
-            max-width: 650px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            perspective: 1200px;
-        }
-
-        /* === КОНВЕРТ ================================== */
-        .envelope-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            transform-origin: center;
-        }
-
-        .envelope {
-            position: relative;
-            width: 320px;
-            height: 220px;
-            background: #fffdf9;
-            border-radius: 12px;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(200, 160, 120, 0.3);
-            cursor: pointer;
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #fff5ed, #ffe8dc);
-            clip-path: polygon(0 0, 100% 0, 50% 55%);
-            border-radius: 12px 12px 0 0;
-            z-index: 1;
-        }
-
-        .envelope-body {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60%;
-            background: #fffaf5;
-            border-radius: 0 0 12px 12px;
-            box-shadow: inset 0 5px 8px rgba(0,0,0,0.02);
-        }
-
-        /* Красная печать с пульсацией */
-        .seal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 85px;
-            height: 85px;
-            background: radial-gradient(circle, #d43f31, #a52216);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffefcf;
-            font-size: 42px;
-            font-weight: bold;
-            font-family: 'Cormorant Garamond', serif;
-            box-shadow: 0 8px 18px rgba(160, 30, 20, 0.4), 0 0 0 3px #ffddbb, 0 0 0 6px rgba(180, 60, 40, 0.3);
-            cursor: pointer;
-            z-index: 20;
-            transition: all 0.2s;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: gentlePulse 1.3s infinite ease-in-out;
-        }
-
-        @keyframes gentlePulse {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                box-shadow: 0 8px 18px rgba(160, 30, 20, 0.4), 0 0 0 3px #ffddbb, 0 0 0 6px rgba(200, 70, 50, 0.3);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.07);
-                box-shadow: 0 10px 25px rgba(190, 40, 30, 0.6), 0 0 0 5px #ffeedd, 0 0 0 10px rgba(210, 80, 60, 0.5);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-                box-shadow: 0 8px 18px rgba(160, 30, 20, 0.4), 0 0 0 3px #ffddbb, 0 0 0 6px rgba(200, 70, 50, 0.3);
-            }
-        }
-
-        .envelope-wrapper.hide-envelope {
-            animation: envelopeFlyAway 0.55s forwards ease-out;
-            pointer-events: none;
-        }
-
-        @keyframes envelopeFlyAway {
-            0% {
-                opacity: 1;
-                transform: scale(1) rotateY(0deg);
-            }
-            40% {
-                opacity: 0.8;
-                transform: scale(0.92) rotateY(10deg);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.5) rotateY(25deg);
-                visibility: hidden;
-            }
-        }
-
-        /* === ОТКРЫТКА ================================= */
-        .invitation-container {
-            background: rgba(255, 250, 245, 0.96);
-            border-radius: 42px 28px 42px 28px;
-            box-shadow: 0 25px 45px -12px rgba(80, 30, 20, 0.3), inset 0 0 0 1px rgba(255, 245, 235, 0.8);
-            backdrop-filter: blur(1px);
-            overflow: hidden;
-            transition: all 0.4s;
-            position: relative;
-        }
-
-        .invitation-container::before {
-            content: "";
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 1px solid rgba(180, 70, 50, 0.25);
-            border-radius: 32px 20px 32px 20px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .invitation-container::after {
-            content: "❦";
-            font-size: 28px;
-            color: #c5654b;
-            opacity: 0.2;
-            position: absolute;
-            bottom: 15px;
-            right: 20px;
-            font-family: serif;
-            transform: rotate(15deg);
-            pointer-events: none;
-        }
-
-        /* Скрытие элементов */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Шаги */
-        .step {
-            padding: 2rem 1.8rem;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            text-align: center;
-            background: transparent;
-        }
-
-        /* Анимация появления карточек */
-        .step-enter-active {
-            animation: fadeSlideUp 0.5s forwards;
-        }
-
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .step-exit-active {
-            animation: fadeSlideDown 0.4s forwards;
-        }
-
-        @keyframes fadeSlideDown {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-20px);
-                visibility: hidden;
-            }
-        }
-
-        /* Новая пульсация для карточек (как у печати, но мягче) */
-        .step:not(.hidden) .card-content {
-            animation: cardPulse 1.5s infinite ease-in-out;
-            transform-origin: center;
-            transition: all 0.2s;
-        }
-
-        @keyframes cardPulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 0 0 0px rgba(200, 90, 70, 0);
-            }
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 20px 35px rgba(130, 50, 40, 0.15), 0 0 0 4px rgba(210, 100, 70, 0.25);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 0 0 0px rgba(200, 90, 70, 0);
-            }
-        }
-
-        /* Оформление контента */
-        h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: #8b3c2c;
-            letter-spacing: 1px;
-            margin-bottom: 0.6rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2:before, h2:after {
-            content: "✧";
-            font-size: 1.3rem;
-            color: #c4775c;
-            margin: 0 8px;
-            opacity: 0.7;
-        }
-
-        h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #9f3e2c;
-            margin: 20px 0 15px;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 6px rgba(150, 50, 30, 0.08);
-        }
-
-        .card-content {
-            background: rgba(255, 248, 240, 0.85);
-            border-radius: 48px;
-            padding: 20px 15px;
-            transition: all 0.3s;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(210, 120, 90, 0.2);
-        }
-
-        .card-content p {
-            font-size: 1.25rem;
-            line-height: 1.5;
-            margin: 18px 0;
-            color: #4a2a20;
-            font-weight: 500;
-            background: #fffaf4;
-            padding: 12px;
-            border-radius: 50px;
-            display: inline-block;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-        }
-
-        .card-content strong {
-            color: #bc4e36;
-            font-weight: 600;
-        }
-
-        .ornament {
-            background-image: radial-gradient(circle, #dd8a6e 1.5px, transparent 1.5px);
-            background-size: 18px 18px;
-            height: 28px;
-            width: 80%;
-            margin: 18px auto;
-            opacity: 0.4;
-        }
-
-        .next-btn {
-            background: linear-gradient(115deg, #fff0e6, #ffe3d6);
-            border: 1.5px solid #cd7a60;
-            padding: 12px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-            color: #a13f2b;
-            border-radius: 60px;
-            margin-top: 22px;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            letter-spacing: 1px;
-        }
-
-        .next-btn:hover {
-            background: linear-gradient(115deg, #ffe6dc, #ffdad0);
-            transform: scale(1.02);
-            border-color: #b95a40;
-            box-shadow: 0 10px 18px rgba(170, 70, 40, 0.15);
-            color: #7e2e1c;
-        }
-
-        .next-btn:active {
-            transform: scale(0.96);
-        }
-
-        .thanks {
-            font-style: italic;
-            font-size: 1rem;
-            margin-top: 25px;
-            color: #ab5e48;
-            letter-spacing: 0.5px;
-            border-top: 1px dashed #e7bcab;
-            padding-top: 16px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Адаптивность */
-        @media (max-width: 550px) {
-            body {
-                padding: 12px;
-            }
-            .envelope {
-                width: 280px;
-                height: 190px;
-            }
-            .seal {
-                width: 70px;
-                height: 70px;
-                font-size: 34px;
-            }
-            .step {
-                padding: 1.8rem 1rem;
-            }
-            h1 {
-                font-size: 2.2rem;
-            }
-            h2 {
-                font-size: 1.4rem;
-            }
-            .card-content p {
-                font-size: 1rem;
-                padding: 10px 14px;
-            }
-            .next-btn {
-                padding: 10px 28px;
-                font-size: 1rem;
-            }
-            @keyframes cardPulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.01); }
-                100% { transform: scale(1); }
-            }
-        }
-
-        @media (max-width: 380px) {
-            .envelope {
-                width: 250px;
-                height: 170px;
-            }
-            .seal {
-                width: 62px;
-                height: 62px;
-                font-size: 30px;
-            }
-            h1 {
-                font-size: 1.9rem;
-            }
-        }
-
-        .flower-deco {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path fill="%23dd8870" d="M20,6 Q24,12 20,18 Q16,12 20,6z M20,22 Q24,28 20,34 Q16,28 20,22z M6,20 Q12,24 18,20 Q12,16 6,20z M22,20 Q28,24 34,20 Q28,16 22,20z" opacity="0.2"/></svg>');
-            background-repeat: repeat;
-            background-size: 28px;
-            position: absolute;
-            inset: 0;
-            opacity: 0.15;
-            pointer-events: none;
-            border-radius: inherit;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кав'ярня в центрі Городка</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="main-container">
-    <!-- КОНВЕРТ -->
-    <div class="envelope-wrapper" id="envelopeWrapper">
-        <div class="envelope" id="envelope">
-            <div class="envelope-flap"></div>
-            <div class="envelope-body"></div>
-            <div class="seal" id="sealBtn">
-                ❤️
+    <header>
+        <div class="container">
+            <div class="logo">☕ Городок Кава</div>
+            <nav>
+                <a href="#menu">Menu</a>
+                <a href="#about">Про нас</a>
+                <a href="#contacts">Контакти</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Найкраща кава та свіжа випічка у Городку</h1>
+            <p>Завітайте до нас у самому центрі міста поруч із парком</p>
+            <a href="#menu" class="btn">Дивитись меню</a>
+        </div>
+    </section>
+
+    <section id="menu" class="container section">
+        <h2>Наше Меню</h2>
+        <p class="menu-subtitle">Свіжообсмажена кава та смаколики</p>
+        
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3>☕ Класична кава</h3>
+                <div class="menu-item">
+                    <span class="item-name">Еспресо</span>
+                    <span class="item-line"></span>
+                    <span class="item-price">40 грн</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Капучино</span>
+                    <span class="item-line"></span>
+                    <span class="item-price">55 грн</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Лате</span>
+                    <span class="item-line"></span>
+                    <span class="item-price">60 грн</span>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>🥐 Свіжа випічка</h3>
+                <div class="menu-item">
+                    <span class="item-name">Круасан класичний</span>
+                    <span class="item-line"></span>
+                    <span class="item-price">45 грн</span>
+                </div>
+                <div class="menu-item">
+                    <span class="item-name">Чизкейк Нью-Йорк</span>
+                    <span class="item-line"></span>
+                    <span class="item-price">75 грн</span>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="invitationCard" class="invitation-container hidden">
-        <div class="flower-deco"></div>
-        <div class="step step-1" id="step1">
-            <div class="card-content">
-                <h2>✨ Весільне Запрошення ✨</h2>
-                <h1>Антон & Марія</h1>
-                <div class="ornament"></div>
-                <p>Сердечно запрошуємо вас<br>розділити з нами радість одруження!</p>
-                <button class="next-btn" data-next="2">💌 Далі 💌</button>
+    <section id="about" class="container section">
+        <h2>Чому обирають нас?</h2>
+        <div class="features">
+            <div class="feature-box">
+                <h3>Fresh Ростері</h3>
+                <p>Використовуємо лише 100% арабіку свіжого обсмаження.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Власна випічка</h3>
+                <p>Кожного ранку випікаємо свіжі круасани.</p>
             </div>
         </div>
+    </section>
 
-        <!-- Шаг 2 - место и дата -->
-        <div class="step step-2 hidden" id="step2">
-            <div class="card-content">
-                <h2>📍 Місце проведения</h2>
-                <p><strong>Польша, місто Краків</strong><br>вул. Кафки 22, Кафе "Уельс"</p>
-                <div class="ornament"></div>
-                <p><strong>📅 Дата:</strong> 16 Серпня</p>
-                <button class="next-btn" data-next="3">✨ Далі ✨</button>
+    <section id="contacts" class="contacts-section">
+        <div class="container">
+            <h2>Де нас знайти?</h2>
+            <div class="contacts-grid">
+                <div class="contacts-info">
+                    <p>📍 <strong>Адреса:</strong> м. Городок, центр (біля парку)</p>
+                    <p>🕒 <strong>Графік:</strong> Щодня з 08:00 до 21:00</p>
+                    
+                    <div class="social-buttons">
+                      <a href="https://waze.com/ul?ll=49.78635753404676,23.655136758269116&navigate=yes" target="_blank" style="display: inline-block; background-color: #2da1c7; color: #ffffff !important; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; border-bottom: 4px solid #1b6d88; margin-right: 15px;">Маршрут у Waze 🚗</a>
+                        <a href="https://t.me/your_username" target="_blank" class="btn-social tg">Telegram</a>
+                    </div>
+                </div>
+                <div class="map">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d644.7570499696414!2d23.654516709664536!3d49.78631109311246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDknNDcnMTAuNyJOIDIzwrAzOScyMS4zIkU!5e0!3m2!1suk!2sua!4v1719690000000!5m2!1suk!2sua" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="step step-3 hidden" id="step3">
-            <div class="card-content">
-                <h2>🌸 Важливо 🌸</h2>
-                <p><strong>Будь ласка, повідомте Антона до 1 Липня</strong><br>чи вийде у вас приїхати.</p>
-                <div class="ornament"></div>
-                <p class="thanks">З любовю і нетерпінням,<br>Антон та Марія 💒</p>
-            </div>
-        </div>
-    </div>
-</div>
+    <footer>
+        <p>© 2026 Розробка сайту: Твоє Ім'я</p>
+    </footer>
 
-<script>
-    (function() {
-        const envelopeWrapper = document.getElementById('envelopeWrapper');
-        const seal = document.getElementById('sealBtn');
-        const invitationCard = document.getElementById('invitationCard');
-        
-        const step1 = document.getElementById('step1');
-        const step2 = document.getElementById('step2');
-        const step3 = document.getElementById('step3');
-        
-        let currentStep = 1;
-        let isTransitioning = false;
-        let envelopeOpened = false;
-        
-        function openInvitation() {
-            if (envelopeOpened) return;
-            envelopeOpened = true;
-            
-            envelopeWrapper.classList.add('hide-envelope');
-            
-            setTimeout(() => {
-                envelopeWrapper.style.display = 'none';
-                invitationCard.classList.remove('hidden');
-                animateStepEnter(step1);
-                currentStep = 1;
-                updateStepsVisibility();
-                invitationCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 500);
-        }
-        
-        function animateStepEnter(stepElement) {
-            if (!stepElement) return;
-            stepElement.classList.remove('step-exit-active', 'hidden');
-            stepElement.classList.add('step-enter-active');
-            setTimeout(() => {
-                stepElement.classList.remove('step-enter-active');
-            }, 450);
-        }
-        
-        function animateStepExit(stepElement, callback) {
-            if (!stepElement) {
-                if(callback) callback();
-                return;
-            }
-            stepElement.classList.add('step-exit-active');
-            setTimeout(() => {
-                stepElement.classList.remove('step-exit-active');
-                if (callback) callback();
-            }, 380);
-        }
-        
-        function updateStepsVisibility() {
-            step1.classList.add('hidden');
-            step2.classList.add('hidden');
-            step3.classList.add('hidden');
-            if (currentStep === 1) step1.classList.remove('hidden');
-            if (currentStep === 2) step2.classList.remove('hidden');
-            if (currentStep === 3) step3.classList.remove('hidden');
-        }
-        
-        function goToNextStep(nextStepNumber) {
-            if (isTransitioning) return;
-            if (nextStepNumber < 1 || nextStepNumber > 3) return;
-            
-            let currentStepElem = null;
-            if (currentStep === 1) currentStepElem = step1;
-            if (currentStep === 2) currentStepElem = step2;
-            if (currentStep === 3) currentStepElem = step3;
-            
-            let nextStepElem = null;
-            if (nextStepNumber === 1) nextStepElem = step1;
-            if (nextStepNumber === 2) nextStepElem = step2;
-            if (nextStepNumber === 3) nextStepElem = step3;
-            
-            if (!currentStepElem || !nextStepElem) return;
-            
-            isTransitioning = true;
-            animateStepExit(currentStepElem, () => {
-                currentStepElem.classList.add('hidden');
-                nextStepElem.classList.remove('hidden');
-                animateStepEnter(nextStepElem);
-                currentStep = nextStepNumber;
-                isTransitioning = false;
-            });
-        }
-        
-        function handleNextClick(e) {
-            e.stopPropagation();
-            if (isTransitioning) return;
-            const btn = e.currentTarget;
-            const nextStep = btn.getAttribute('data-next');
-            if (nextStep) {
-                const nextNum = parseInt(nextStep, 10);
-                if (!isNaN(nextNum) && nextNum > currentStep && nextNum <= 3) {
-                    goToNextStep(nextNum);
-                }
-            }
-        }
-        
-        function attachNextButtonListeners() {
-            const allNextButtons = document.querySelectorAll('.next-btn');
-            allNextButtons.forEach(btn => {
-                btn.removeEventListener('click', handleNextClick);
-                btn.addEventListener('click', handleNextClick);
-            });
-        }
-        
-        if (seal) {
-            seal.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!envelopeOpened) openInvitation();
-            });
-        }
-        
-        const envelopeDiv = document.getElementById('envelope');
-        if (envelopeDiv) {
-            envelopeDiv.addEventListener('click', (e) => {
-                if (!envelopeOpened && e.target !== seal && !seal.contains(e.target)) {
-                    openInvitation();
-                }
-            });
-        }
-        
-        // Инициализация: открытка скрыта, конверт виден
-        invitationCard.classList.add('hidden');
-        envelopeWrapper.style.display = 'flex';
-        envelopeWrapper.classList.remove('hide-envelope');
-        envelopeOpened = false;
-        currentStep = 1;
-        updateStepsVisibility();
-        
-        attachNextButtonListeners();
-        
-        const observer = new MutationObserver(() => {
-            attachNextButtonListeners();
-        });
-        observer.observe(invitationCard, { childList: true, subtree: true });
-        
-        // Декоративный узор, если вдруг отсутствует
-        if (!invitationCard.querySelector('.flower-deco')) {
-            const deco = document.createElement('div');
-            deco.className = 'flower-deco';
-            invitationCard.appendChild(deco);
-        }
-    })();
-</script>
 </body>
 </html>
