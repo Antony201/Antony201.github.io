@@ -1,0 +1,335 @@
+/* --- КРАСА ДЛЯ САЙТУ --- */
+
+/* 1. Обнулення та базові налаштування */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Сучасний шрифт без підключення */
+    color: #4a3e35; /* Шляхетний темно-кавовий */
+    line-height: 1.8;
+    background-color: #fdfaf5; /* Світло-кремовий фон */
+}
+
+.container {
+    width: 85%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 2. Шапка (Header) */
+header {
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky; /* Липка шапка */
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #6F4E37; /* Кавовий */
+    letter-spacing: -1px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    margin-left: 25px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #6F4E37;
+}
+
+/* 3. Головний банер (Hero) */
+.hero {
+    /* Використовуємо реальну красиву картинку кав'ярні з інтернету */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1600') no-repeat center center/cover;
+    height: 80vh; /* Висота банера */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 35px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #6F4E37; /* Кавовий */
+    color: #fff;
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 50px; /* Круглі кнопки */
+    font-weight: 700;
+    font-size: 16px;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 15px rgba(111, 78, 55, 0.3);
+}
+
+.btn:hover {
+    background-color: #553c2a;
+    transform: translateY(-3px); /* Ефект при наведенні */
+}
+
+/* 4. Секції */
+.section {
+    padding: 80px 0;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #6F4E37;
+}
+
+/* 5. Меню */
+.menu-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #8a6b56;
+    margin-bottom: 35px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.menu-category {
+    background: linear-gradient(145deg, #fffdf9, #f8efe6);
+    border: 1px solid rgba(111, 78, 55, 0.12);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 12px 35px rgba(111, 78, 55, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-category::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.45) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.menu-category:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(111, 78, 55, 0.15);
+}
+
+.menu-category:hover::before {
+    transform: translateX(100%);
+}
+
+.menu-category h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #6F4E37;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(111, 78, 55, 0.2);
+    animation: fadeUp 0.6s ease both;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.menu-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.item-name {
+    font-weight: 700;
+    color: #4a3e35;
+    white-space: nowrap;
+}
+
+.item-line {
+    flex: 1;
+    border-bottom: 2px dotted rgba(111, 78, 55, 0.25);
+    min-width: 20px;
+}
+
+.item-price {
+    font-weight: 800;
+    color: #8b5e3c;
+    white-space: nowrap;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 6. Переваги */
+.features {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.feature-box {
+    flex: 1;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+}
+
+.feature-box h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #6F4E37;
+}
+
+/* 6. Контакти та Карта */
+.contacts-section {
+    background-color: #f6ede2;
+}
+
+.contacts-grid {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.contacts-info, .map {
+    flex: 1;
+}
+
+.contacts-info p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Іконки (прості, без підключення) */
+.contacts-info p strong { margin-right: 10px; color: #6F4E37; }
+
+.social-buttons { margin-top: 30px; }
+
+.btn-social {
+    display: inline-block;
+    padding: 12px 25px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-right: 15px;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.btn-social:hover { opacity: 0.8; }
+
+.tg { background-color: #0088cc; }
+.vb { background-color: #7360f2; }
+
+.map {
+    border-radius: 15px;
+    overflow: hidden; /* Щоб карта була круглою */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* 7. Підвал (Footer) */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* 8. Адаптивність (для телефонів) */
+@media (max-width: 768px) {
+    .container { width: 95%; }
+    .hero-content h1 { font-size: 32px; }
+    .hero-content p { font-size: 16px; }
+    .features { flex-direction: column; }
+    .contacts-grid { flex-direction: column-reverse; gap: 30px; }
+    nav a { margin-left: 10px; font-size: 13px; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .menu-category { padding: 24px; }
+
+    .social-buttons a[href*="waze.com"] {
+        background-color: #2da1c7 !important;
+        color: #ffffff !important;
+        border-bottom: 4px solid #1b6d88 !important;
+        display: inline-block !important;
+        padding: 12px 20px !important;
+        border-radius: 8px !important;
+        text-decoration: none !important;
+        font-weight: 600 !important;
+    }
+
+    .social-buttons a[href*="waze.com"]:hover {
+        background-color: #3cb0d6 !important;
+    }
+}
+
